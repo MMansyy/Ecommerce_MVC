@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Manage Products";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Manage Products</h1>
+    <a asp-action="Create" asp-controller="Product" class="btn btn-primary">Add Product</a>
+</div>
+
+<div class="card form-card p-3">
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>SKU</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@(item.Category?.Name ?? item.CategoryId.ToString())</td>
+                        <td>@item.SKU</td>
+                        <td>@item.Price.ToString("C")</td>
+                        <td>@item.StockQuantity</td>
+                        <td>
+                            <span class="badge @(item.IsActive ? "bg-success-subtle text-success" : "bg-secondary-subtle text-secondary")">
+                                @(item.IsActive ? "Active" : "Inactive")
+                            </span>
+                        </td>
+                        <td class="text-end">
+                            <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-outline-secondary btn-sm">Edit</a>
+                            <a asp-controller="Catalog" asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-outline-primary btn-sm">View</a>
+                            <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-outline-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
