@@ -65,7 +65,7 @@ body {
 }
 
 .product-image {
-  height: 210px;
+  height: 80%;
   object-fit: cover;
   border-top-left-radius: 0.9rem;
   border-top-right-radius: 0.9rem;
